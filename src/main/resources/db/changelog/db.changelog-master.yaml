@@ -1,3 +1,10 @@
 databaseChangeLog:
   - include:
       file: db/changelog/changes/001-create-aluno.yaml
+
+  - include:
+      file: db/changelog/changes/002-create-user.yaml
+
+  - include:
+      file: db/changelog/changes/003-create-users.yaml
+
