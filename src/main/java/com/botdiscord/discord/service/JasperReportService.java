@@ -3,6 +3,7 @@ package com.botdiscord.discord.service;
 import com.botdiscord.discord.dto.Imovel;
 import net.sf.jasperreports.engine.*;
 import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -38,7 +39,7 @@ public class JasperReportService {
         String caminho = getAbsolutePath();
 
         try {
-            JasperReport jasperReport = JasperCompileManager.compileReport(caminho);
+            JasperReport jasperReport = getJasperReport();
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, new JREmptyDataSource());
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             JasperExportManager.exportReportToPdfStream(jasperPrint, byteArrayOutputStream);
@@ -49,12 +50,18 @@ public class JasperReportService {
 
     }
 
-    private byte[] loadimagem(String image) throws IOException{
-
-        String imagem = ResourceUtils.getFile(IMAGEM).getAbsolutePath();
-        File file = new File(imagem);
-        try(InputStream inputStream = new FileInputStream(file)){
+    private byte[] loadimagem(String imagePath) throws IOException {
+        ClassPathResource resource = new ClassPathResource(imagePath.replace("classpath:", ""));
+        try (InputStream inputStream = resource.getInputStream()) {
             return IOUtils.toByteArray(inputStream);
+        }
+    }
+
+    private JasperReport getJasperReport() throws JRException, IOException {
+        String pathSemClasspath = RELATORIO.replace("classpath:", "") + ARQUIVOJRXML;
+        ClassPathResource resource = new ClassPathResource(pathSemClasspath);
+        try (InputStream inputStream = resource.getInputStream()) {
+            return JasperCompileManager.compileReport(inputStream);
         }
     }
 
