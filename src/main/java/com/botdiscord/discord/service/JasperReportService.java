@@ -36,8 +36,6 @@ public class JasperReportService {
         params.put("descricao", imovel.getDescricao());
         params.put("imageJasper", imagem);
 
-        String caminho = getAbsolutePath();
-
         try {
             JasperReport jasperReport = getJasperReport();
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, new JREmptyDataSource());
@@ -63,10 +61,6 @@ public class JasperReportService {
         try (InputStream inputStream = resource.getInputStream()) {
             return JasperCompileManager.compileReport(inputStream);
         }
-    }
-
-    private String getAbsolutePath() throws FileNotFoundException {
-        return ResourceUtils.getFile(RELATORIO + ARQUIVOJRXML).getAbsolutePath();
     }
 
     private String encodeFileToBase64(byte[] fileData) {
