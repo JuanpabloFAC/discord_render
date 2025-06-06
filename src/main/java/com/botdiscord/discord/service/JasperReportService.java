@@ -21,7 +21,7 @@ public class JasperReportService {
 
     public String gerarPdf(Imovel imovel) throws IOException {
 
-        byte[] imagem = this.loadimagem(IMAGEM);
+//        byte[] imagem = this.loadimagem(IMAGEM);
 
         Map<String, Object> params = new HashMap<>();
         params.put("ultimaGeracao", imovel.getUltimaGeracao());
@@ -34,7 +34,7 @@ public class JasperReportService {
         params.put("anoDeConstrucao", imovel.getAnoDeConstrucao());
         params.put("vagasDeGaragem", imovel.getVagasDeGaragem());
         params.put("descricao", imovel.getDescricao());
-        params.put("imageJasper", imagem);
+//        params.put("imageJasper", imagem);
 
         try {
             JasperReport jasperReport = getJasperReport();
@@ -48,12 +48,12 @@ public class JasperReportService {
 
     }
 
-    private byte[] loadimagem(String imagePath) throws IOException {
-        ClassPathResource resource = new ClassPathResource(imagePath.replace("classpath:", ""));
-        try (InputStream inputStream = resource.getInputStream()) {
-            return IOUtils.toByteArray(inputStream);
-        }
-    }
+//    private byte[] loadimagem(String imagePath) throws IOException {
+//        ClassPathResource resource = new ClassPathResource(imagePath.replace("classpath:", ""));
+//        try (InputStream inputStream = resource.getInputStream()) {
+//            return IOUtils.toByteArray(inputStream);
+//        }
+//    }
 
     private JasperReport getJasperReport() throws JRException, IOException {
         String pathSemClasspath = RELATORIO.replace("classpath:", "") + ARQUIVOJRXML;
