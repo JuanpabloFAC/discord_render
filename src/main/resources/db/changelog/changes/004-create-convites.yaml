@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-convites
+      author: Juan
+      changes:
+        - createTable:
+            tableName: convites
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: nome_convidado
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tipo
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cpf_convidado
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: qrcode
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: data_entrada
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: data_saida
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true
