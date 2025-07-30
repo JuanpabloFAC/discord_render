@@ -46,10 +46,10 @@ public class ConviteController {
         return ResponseEntity.status(HttpStatus.OK).body("Convite Deletado com Sucesso!");
     }
 
-    @GetMapping("/qrcode")
-    public ResponseEntity<String> gerarQRCode() {
+    @GetMapping("/qrcode/{id}")
+    public ResponseEntity<String> gerarQRCode(@PathVariable Long id) {
         try {
-            String qrCodeBase64 = conviteService.gerarQRCode();
+            String qrCodeBase64 = conviteService.gerarQRCode(id);
             return ResponseEntity.ok(qrCodeBase64);
         } catch (WriterException | IOException e) {
             return ResponseEntity.internalServerError().body("Erro ao gerar QR Code.");

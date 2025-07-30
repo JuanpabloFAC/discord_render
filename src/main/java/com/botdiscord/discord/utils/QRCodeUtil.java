@@ -15,10 +15,10 @@ import java.util.Map;
 
 public class QRCodeUtil {
 
-    public static String gerarQRCodeBase64()
+    public static String gerarQRCodeBase64(Long id)
             throws WriterException, IOException {
 
-        String url = "https://meusite.com/convite/123";
+        String url = "https://app--sigcon-login-574e5109.base44.app/AcessoConvite?id=" + id;
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
 

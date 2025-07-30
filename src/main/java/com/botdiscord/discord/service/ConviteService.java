@@ -42,8 +42,8 @@ public class ConviteService {
         conviteRepository.deleteById(id);
     }
 
-    public String gerarQRCode() throws WriterException, IOException {
-        return QRCodeUtil.gerarQRCodeBase64();
+    public String gerarQRCode(Long id) throws WriterException, IOException {
+        return QRCodeUtil.gerarQRCodeBase64(id);
     }
 
     public Convite acesso(Long id) {
