@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class ConviteRequestDTO {
+    private Long id;
     private String nomeConvidado;
     private String cpfConvidado;
     private String tipo;
